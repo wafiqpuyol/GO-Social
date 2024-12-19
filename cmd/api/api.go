@@ -6,13 +6,24 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/wafiqpuyol/GO-Social/internal/store"
 )
 
+// NOTE => This app struct is our dependency
 type application struct {
 	config config
+	store  store.Storage
 }
 type config struct {
 	addr string
+	db   dbConfig
+}
+
+type dbConfig struct {
+	addr               string
+	maxOpenConnections int
+	maxIdleConnections int
+	maxIdleTime        string
 }
 
 func (app *application) mount() http.Handler {
