@@ -3,14 +3,12 @@ package db
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"time"
 
 	_ "github.com/lib/pq"
 )
 
 func NewDB(addr string, maxIdleConnections int, maxOpenConnections int, maxIdleTime string) (*sql.DB, error) {
-	fmt.Println(addr, maxIdleConnections, maxOpenConnections, maxIdleTime)
 	db, err := sql.Open("postgres", addr)
 	if err != nil {
 		return nil, err

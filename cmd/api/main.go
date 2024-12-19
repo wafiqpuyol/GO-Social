@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"log/slog"
 
@@ -23,7 +22,6 @@ func main() {
 
 	/* ------  initialize database connection ------ */
 	slog.Info("Connecting to database", slog.String("addr", config.db.addr))
-	fmt.Println("time ==>", config.db)
 	db, err := db.NewDB(
 		config.db.addr,
 		config.db.maxIdleConnections,
