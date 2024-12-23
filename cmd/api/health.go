@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	"github.com/wafiqpuyol/GO-Social/internal/helper"
 )
 
 func (app *application) health(w http.ResponseWriter, r *http.Request) {
@@ -11,7 +13,7 @@ func (app *application) health(w http.ResponseWriter, r *http.Request) {
 		Status: "okyish",
 	}
 
-	if err := writeJson(w, http.StatusOK, &status); err != nil {
-		writeJsonError(w, http.StatusInternalServerError, err.Error())
+	if err := helper.WriteJson(w, http.StatusOK, &status); err != nil {
+		helper.WriteJsonError(w, http.StatusInternalServerError, err.Error())
 	}
 }
