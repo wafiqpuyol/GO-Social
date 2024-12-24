@@ -33,3 +33,17 @@ func (u *UserStore) GetById(ctx context.Context, user *User) error {
 		Scan(&user.ID, &user.CreatedAt, &user.IsActive)
 	return err
 }
+
+func (s *UserStore) delete(ctx context.Context, tx *sql.Tx, id int64) error {
+	query := `DELETE FROM users WHERE id = $1`
+
+	ctx, cancel := context.WithTimeout(ctx, queryTimeOutDuration)
+	defer cancel()
+
+	_, err := tx.ExecContext(ctx, query, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
